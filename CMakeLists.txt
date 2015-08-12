@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project( playground )
+find_package( OpenCV REQUIRED )
+add_executable(playground main.cpp Gradient.cpp Helper.cpp Filter.cpp)
+target_link_libraries(playground ${OpenCV_LIBS} )
