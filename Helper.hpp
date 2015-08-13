@@ -29,13 +29,14 @@ typedef struct
 	uint* ankerPosition;
 } FilterKernel;
 
+enum Algorithm {sobel, diffQ, diffQN};
+
 class Helper 
 {
 	public:
 		static const double rad2deg = 180/M_PI;
 		static void printImage(cv::Mat img, const string windowName, int colormap);
 		static cv::Mat color2grey(cv::Mat input);
-		
 		
 	private:	
 	

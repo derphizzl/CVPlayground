@@ -19,7 +19,7 @@ class Gradient
 		/**
 		 * \brief returns cv::Mat gradient value image
 		 * \param threshold sets threshold for b/w values, 0 is no threshold */
-		cv::Mat getGradientImg(int lowT, int highT);
+		cv::Mat getGradientImg(int lowT, int highT, Algorithm alg);
 		/**
 		 * \brief returns Gradient vector and value
 		 * \param xy pixel coordinates */
@@ -34,6 +34,10 @@ class Gradient
 		cv::Mat m_binary;
 		cv::Mat m_testOut;
 		int** m_visited;
+		Algorithm m_algo;
+		
+		int m_counter;
+		
 
 		void diffInX(Grad& in, int x, int y);
 		void diffInY(Grad& in, int x, int y); 

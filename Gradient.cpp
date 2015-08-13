@@ -16,6 +16,8 @@ Gradient::Gradient(cv::Mat& input)
 	this->m_gradientParam = createMatrix<Grad>(this->m_img.rows, this->m_img.cols);
 	this->m_visited = createMatrix<int>(this->m_img.rows, this->m_img.cols);
 
+	m_counter = 0;
+	
 	return;
 }
 
@@ -32,8 +34,9 @@ Gradient::~Gradient()
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
-cv::Mat Gradient::getGradientImg(int lowT, int highT) 
+cv::Mat Gradient::getGradientImg(int lowT, int highT, Algorithm alg) 
 {
+	m_algo = alg;
 	iterateOverImg();
 	NonMaximumSuppression();
 	Thresholding(lowT, highT);
@@ -78,36 +81,64 @@ void Gradient::calculateEdgeDirection(Grad& grad)
 {
 	double num = atan2(grad.dy, grad.dx);
 	num *= Helper::rad2deg;
-	if (abs(num) <= 22.5) 
+	/*if (m_counter < 200) 
+	{
+		std::cout << "DEG: " << num << std::endl;
+		std::cout << "Dx: " << grad.dx << std::endl;
+		std::cout << "Dy: " << grad.dy << std::endl;
+	}*/	
+	if (num < 22.5 && num > 0) 
 	{
 		grad.deg = 0;
 		return;
 	}	
-	else if (abs(num) <= 45.0) 
+	else if (num < 0 && num > -22.5) 
+	{
+		grad.deg = 0;
+		return;
+	}
+	else if (num > 157.5) 
+	{
+		grad.deg = 0;
+		return;
+	}
+	else if (num < -157.5) 
+	{
+		grad.deg = 0;
+		return;
+	}
+	else if (num < 67.5 && num > 22.5) 
 	{
 		grad.deg = 45;
 		return;
 	}
-	else if (abs(num) <= 67.5) 
+	else if (num < -22.5 && num > -67.5) 
 	{
 		grad.deg = 45;
 		return;
 	}
-	else if (abs(num) <= 90) 
+	else if (num < 112.5 && num > 67.5) 
 	{
 		grad.deg = 90;
 		return;
 	}
-	else if (abs(num) <= 112.5)
+	else if (num < -67.5 && num > -112.5) 
 	{
 		grad.deg = 90;
 		return;
 	}
-	else if (abs(num) > 112.5) 
+	else if (num < 157.5 && num > 112.5) 
 	{
 		grad.deg = 135;
 		return;
 	}
+	else if (num < -112.5 && num > -157.5) 
+	{
+		grad.deg = 135;
+		return;
+	}
+	
+	
 	
 	return;
 }
@@ -129,12 +160,15 @@ void Gradient::diffInX(Grad& in, int x, int y)
 	else if (y >= this->m_img.cols - 1)
 		y = m_img.cols - 1;
 	
-	in.dx = this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x, y);
-	
-// 	in.dx = (double) ((this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y - 1) + this->m_img.at<uchar>(x - 1, y + 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
-// 	         this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x + 1, y - 1))  / 2);
-	
-// 	in.dx = Filter::SobelX(this->m_img, x, y);
+	if(m_algo == diffQ)
+		in.dx = this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x, y);
+	else if(m_algo == diffQN)
+		in.dx = (double) ((this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y - 1) + this->m_img.at<uchar>(x - 1, y + 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
+			this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x + 1, y - 1))  / 2);
+	else if(m_algo == sobel)
+		in.dx = Filter::SobelX(this->m_img, x, y);
+	else
+		in.dx = this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x, y);
 	
 	return;
 }
@@ -156,10 +190,11 @@ void Gradient::diffInY(Grad& in, int x, int y)
 	
 	else if (y >= this->m_img.cols - 1)
 		y = m_img.cols - 1;
-// 
-	in.dy = this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y);
-// 	in.dy = (double) ((this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x - 1, y) + this->m_img.at<uchar>(x + 1, y - 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
-// 	         this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x - 1, y + 1))  / 2);
+
+// 	in.dy = this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y);
+	
+	in.dy = (double) ((this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x - 1, y) + this->m_img.at<uchar>(x + 1, y - 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
+	         this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x - 1, y + 1))  / 2);
 	
 // 	in.dy = Filter::SobelY(this->m_img, x, y);
 	
@@ -242,7 +277,7 @@ void Gradient::Thresholding(int lower, int higher)
 	{
 		for(int col = 0; col < this->m_gradientImg.cols; ++col) 
 		{
-			if ((int) abs(this->m_gradientImg.at<uchar>(row, col)) < lower) 
+			if ((double) abs(this->m_gradientImg.at<uchar>(row, col)) < lower) 
 			{
 				this->m_gradientImg.at<uchar>(row, col) = 0.0;
 				this->m_threshold[row][col].lowerThresh = 0.0;
@@ -323,7 +358,7 @@ void Gradient::Travers(int x, int y)
 	if (m_visited[x][y] == 1)
 		return;
 	
-	if (this->m_visited[x + 1][y] == 0 && this->m_threshold[x + 1][y].lowerThresh > 0.0 && this->m_gradientParam[x + 1][y].dirX == this->m_gradientParam[x][y].dirX && 
+	if (this->m_visited[x + 1][y] < 1 && this->m_threshold[x + 1][y].lowerThresh > 0.0 && this->m_gradientParam[x + 1][y].dirX == this->m_gradientParam[x][y].dirX && 
 	    this->m_gradientParam[x + 1][y].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 // 		this->m_visited[x][y] = 1;
@@ -335,7 +370,7 @@ void Gradient::Travers(int x, int y)
 		
 	}
 	
-	if (this->m_visited[x][y + 1] == 0 && this->m_threshold[x][y + 1].lowerThresh > 0.0 && this->m_gradientParam[x][y  + 1 ].dirX == this->m_gradientParam[x][y].dirX &&
+	else if (this->m_visited[x][y + 1] < 1 && this->m_threshold[x][y + 1].lowerThresh > 0.0 && this->m_gradientParam[x][y  + 1 ].dirX == this->m_gradientParam[x][y].dirX &&
 		this->m_gradientParam[x][y + 1].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 // 		this->m_visited[x][y] = 1;
@@ -347,7 +382,7 @@ void Gradient::Travers(int x, int y)
 		
 	}
 	
-	if (this->m_visited[x - 1][y] == 0 && this->m_threshold[x - 1][y].lowerThresh > 0.0 && this->m_gradientParam[x - 1][y].dirX == this->m_gradientParam[x][y].dirX &&
+	else if (this->m_visited[x - 1][y] < 1 && this->m_threshold[x - 1][y].lowerThresh > 0.0 && this->m_gradientParam[x - 1][y].dirX == this->m_gradientParam[x][y].dirX &&
 		this->m_gradientParam[x - 1][y].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 // 		this->m_visited[x][y] = 1;
@@ -359,7 +394,7 @@ void Gradient::Travers(int x, int y)
 		
 	}
 	
-	if (this->m_visited[x][y - 1] == 0 && this->m_threshold[x][y - 1].lowerThresh > 0.0 && this->m_gradientParam[x][y - 1].dirX == this->m_gradientParam[x][y].dirX &&
+	else if (this->m_visited[x][y - 1] < 1 && this->m_threshold[x][y - 1].lowerThresh > 0.0 && this->m_gradientParam[x][y - 1].dirX == this->m_gradientParam[x][y].dirX &&
 		this->m_gradientParam[x][y - 1].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 // 		this->m_visited[x][y] = 1;
@@ -371,7 +406,7 @@ void Gradient::Travers(int x, int y)
 		
 	}
 	
-	if (this->m_visited[x - 1][y - 1] == 0 && this->m_threshold[x - 1][y - 1].lowerThresh > 0.0 && this->m_gradientParam[x - 1][y - 1].dirX == this->m_gradientParam[x][y].dirX &&
+	else if (this->m_visited[x - 1][y - 1] < 1 && this->m_threshold[x - 1][y - 1].lowerThresh > 0.0 && this->m_gradientParam[x - 1][y - 1].dirX == this->m_gradientParam[x][y].dirX &&
 		this->m_gradientParam[x - 1][y - 1].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 // 		this->m_visited[x][y] = 1;
@@ -383,7 +418,7 @@ void Gradient::Travers(int x, int y)
 		
 	}
 	
-	if (this->m_visited[x + 1][y - 1] == 0 && this->m_threshold[x + 1][y - 1].lowerThresh > 0.0 && this->m_gradientParam[x + 1][y - 1].dirX == this->m_gradientParam[x][y].dirX &&
+	else if (this->m_visited[x + 1][y - 1] < 1 && this->m_threshold[x + 1][y - 1].lowerThresh > 0.0 && this->m_gradientParam[x + 1][y - 1].dirX == this->m_gradientParam[x][y].dirX &&
 		this->m_gradientParam[x + 1][y - 1].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 // 		this->m_visited[x][y] = 1;
@@ -395,7 +430,7 @@ void Gradient::Travers(int x, int y)
 		
 	}
 	
-	if (this->m_visited[x - 1][y + 1] == 0 && this->m_threshold[x - 1][y + 1].lowerThresh > 0.0 && this->m_gradientParam[x - 1][y + 1].dirX == this->m_gradientParam[x][y].dirX &&
+	else if (this->m_visited[x - 1][y + 1] < 1 && this->m_threshold[x - 1][y + 1].lowerThresh > 0.0 && this->m_gradientParam[x - 1][y + 1].dirX == this->m_gradientParam[x][y].dirX &&
 		this->m_gradientParam[x - 1][y + 1].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 		this->m_visited[x][y] = 1;
@@ -407,7 +442,7 @@ void Gradient::Travers(int x, int y)
 		
 	}
 	
-	if (this->m_visited[x + 1][y + 1] == 0 && this->m_threshold[x + 1][y + 1].lowerThresh > 0.0 && this->m_gradientParam[x + 1][y + 1].dirX == this->m_gradientParam[x][y].dirX &&
+	else if (this->m_visited[x + 1][y + 1] < 1 && this->m_threshold[x + 1][y + 1].lowerThresh > 0.0 && this->m_gradientParam[x + 1][y + 1].dirX == this->m_gradientParam[x][y].dirX &&
 		this->m_gradientParam[x + 1][y + 1].dirY == this->m_gradientParam[x][y].dirY) 
 	{
 		this->m_visited[x][y] = 1;

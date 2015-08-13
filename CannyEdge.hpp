@@ -6,14 +6,14 @@
 
 class canny {
 	public:
-		static void getCannyEdge(cv::Mat& input, cv::Mat& output, int lowT, int highT, int kernelSize) 
+		static void getCannyEdge(cv::Mat& input, cv::Mat& output, int lowT, int highT, int kernelSize, Algorithm alg) 
 		{
 			Filter f(input, kernelSize);
 
 			cv::Mat filtered = f.getFilteredImg();
 	
 			Gradient gr(filtered);
-			output = gr.getGradientImg(2, 6);
+			output = gr.getGradientImg(lowT, highT, alg);
 			
 			return;
 		}

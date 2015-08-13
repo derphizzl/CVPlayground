@@ -41,36 +41,79 @@ int main (int argc, char** argv)
 		return -1;
 
 	cv::Mat grey;
+	int low, high;
+	low = 2;
+	high = 12;
+	
+	Algorithm alg = diffQ;
 	
 	cv::namedWindow("edges",1);
 	for(;;)
 	{
+		if (high > 255)
+			high = 255;
+		
+		if (low < 0 && high < 0) 
+		{
+			low = 1;
+			high = 2;
+		}
+		
+		if (low >= high)
+			low = high -1;
+		
+		
+		
 		cv::Mat frame;
 		cv::Mat out;
+		
 		cap >> frame; // get a new frame from camera
 		
 		cv::cvtColor(frame, grey, CV_BGR2GRAY);
 		
-		canny::getCannyEdge(grey, out, 1, 2, 5);
+		canny::getCannyEdge(grey, out, low, high, 3, alg);
 		
 		cv::imshow("bla", /*filter_calc*/out);
-		cv::imshow("Blo", frame);
-		if(cv::waitKey(30) >= 0) 
-		{
+// 		cv::imshow("Blo", frame);
+		char inp = cv::waitKey(30); 
+		
+		if (inp == 'q')
 			break;
-		}	
+		
+		if (inp == 'p')
+			high++;
+		
+		if (inp == 'l')
+			high--;
+		
+		if (inp == 'o')
+			low++;
+		
+		if (inp == 'k')
+			low--;
+		
+		if (inp == 's')
+			alg = sobel;
+		
+		if (inp == 'd')
+			alg = diffQ;
+				
+		if (inp == 'f')
+			alg = diffQN;
+			
 	}
 	
 	//////////////////////////////////////////////////////CANNY/////////////////////////////////////////////
 	
-/*
-	cv::Mat out;
-	canny::getCannyEdge(img_grey, out, 3, 6, 5);
-	cv::Mat canny;
-	cv::Canny(img_grey, canny, 100, 200, filtersize);
-	Helper::printImage(img_grey, "GREY", 1);	
-	Helper::printImage(out, "CANNY PHT", 1);
-	Helper::printImage(canny, "CANNY OPENCV", 1);*/
+
+// 	cv::Mat out;
+// 	canny::getCannyEdge(img_grey, out, 5, 12, 5); //normal diff
+// // 	canny::getCannyEdge(img_grey, out, 18, 65, 5);
+// 	cv::Mat canny;
+// 	cv::Canny(img_grey, canny, 100, 200, filtersize);
+// 	Helper::printImage(img_grey, "GREY", 1);	
+// 	Helper::printImage(out, "CANNY PHT", 1);
+// 	Helper::printImage(canny, "CANNY OPENCV", 1);
 	
 
 	
