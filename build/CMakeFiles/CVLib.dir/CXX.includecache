@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/phil/projects/PlaygroundOpenCV/CVLib.cpp
+CVLib.h
+/home/phil/projects/PlaygroundOpenCV/CVLib.h
+
+/home/phil/projects/PlaygroundOpenCV/CVLib.h
+CannyEdge.hpp
+/home/phil/projects/PlaygroundOpenCV/CannyEdge.hpp
+
 /home/phil/projects/PlaygroundOpenCV/CannyEdge.hpp
 Gradient.hpp
 /home/phil/projects/PlaygroundOpenCV/Gradient.hpp
@@ -55,22 +63,4 @@ opencv2/core.hpp
 /home/phil/projects/PlaygroundOpenCV/opencv2/core.hpp
 opencv2/highgui.hpp
 /home/phil/projects/PlaygroundOpenCV/opencv2/highgui.hpp
-
-/home/phil/projects/PlaygroundOpenCV/HoughLines.cpp
-iostream
--
-cstdlib
--
-memory
--
-HoughLines.hpp
-/home/phil/projects/PlaygroundOpenCV/HoughLines.hpp
-
-/home/phil/projects/PlaygroundOpenCV/HoughLines.hpp
-CannyEdge.hpp
-/home/phil/projects/PlaygroundOpenCV/CannyEdge.hpp
-iostream
--
-fstream
--
 

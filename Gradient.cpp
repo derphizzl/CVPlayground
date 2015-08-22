@@ -163,7 +163,7 @@ void Gradient::diffInX(Grad& in, int x, int y)
 	if(m_algo == diffQ)
 		in.dx = this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x, y);
 	else if(m_algo == diffQN)
-		in.dx = (double) ((this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y - 1) + this->m_img.at<uchar>(x - 1, y + 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
+		in.dx = ((this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y - 1) + this->m_img.at<uchar>(x - 1, y + 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
 			this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x + 1, y - 1))  / 2);
 	else if(m_algo == sobel)
 		in.dx = Filter::SobelX(this->m_img, x, y);
@@ -190,13 +190,15 @@ void Gradient::diffInY(Grad& in, int x, int y)
 	
 	else if (y >= this->m_img.cols - 1)
 		y = m_img.cols - 1;
-
-// 	in.dy = this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y);
 	
-	in.dy = (double) ((this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x - 1, y) + this->m_img.at<uchar>(x + 1, y - 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
-	         this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x - 1, y + 1))  / 2);
+	if(m_algo == diffQ)
+		in.dy = this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y);
 	
-// 	in.dy = Filter::SobelY(this->m_img, x, y);
+	else if(m_algo == diffQ)
+		in.dy = ((this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x - 1, y) + this->m_img.at<uchar>(x + 1, y - 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
+			this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x - 1, y + 1))  / 2);
+	if(m_algo == sobel)
+		in.dy = Filter::SobelY(this->m_img, x, y);
 	
 	return;
 }
@@ -277,18 +279,18 @@ void Gradient::Thresholding(int lower, int higher)
 	{
 		for(int col = 0; col < this->m_gradientImg.cols; ++col) 
 		{
-			if ((double) abs(this->m_gradientImg.at<uchar>(row, col)) < lower) 
+			if ((int) abs(this->m_gradientImg.at<uchar>(row, col)) < lower) 
 			{
 				this->m_gradientImg.at<uchar>(row, col) = 0.0;
 				this->m_threshold[row][col].lowerThresh = 0.0;
 				this->m_threshold[row][col].higherThresh = 0.0;
 			}	
-			else if ((double) abs(this->m_gradientImg.at<uchar>(row, col)) >= lower && (double) abs(this->m_gradientImg.at<uchar>(row, col)) < higher)
+			else if ((int) abs(this->m_gradientImg.at<uchar>(row, col)) >= lower && (double) abs(this->m_gradientImg.at<uchar>(row, col)) < higher)
 			{
 				this->m_threshold[row][col].lowerThresh = (double) abs(this->m_gradientImg.at<uchar>(row, col));
 				this->m_threshold[row][col].higherThresh = 0.0;
 			}
-			else if ((double) abs(this->m_gradientImg.at<uchar>(row, col)) >= higher)
+			else if ((int) abs(this->m_gradientImg.at<uchar>(row, col)) >= higher)
 			{
 				this->m_threshold[row][col].lowerThresh = 0.0;
 				this->m_threshold[row][col].higherThresh = (double) abs(this->m_gradientImg.at<uchar>(row, col));

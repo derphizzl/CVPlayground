@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/phil/projects/PlaygroundOpenCV/build
 CMakeFiles/playground.dir/all:
 	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/depend
 	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles  1 2 3 4
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles  1 2 3 4 5 6 7
 	@echo "Built target playground"
 .PHONY : CMakeFiles/playground.dir/all
 
@@ -69,7 +69,7 @@ all: CMakeFiles/playground.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/playground.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles 7
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/playground.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles 0
 .PHONY : CMakeFiles/playground.dir/rule

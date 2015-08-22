@@ -37,8 +37,8 @@ namespace filter
 		
 		void setInputKernel(FilterKernel kern, uint size);
 		cv::Mat getFilteredImg();
-		static uchar SobelX(cv::Mat& input, uint row, uint col);
-		static uchar SobelY(cv::Mat& input, uint row, uint col);
+		static double SobelX(cv::Mat& input, uint row, uint col);
+		static double SobelY(cv::Mat& input, uint row, uint col);
 		
 		
 		void gaussian();

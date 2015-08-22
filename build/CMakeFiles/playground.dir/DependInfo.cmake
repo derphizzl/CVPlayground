@@ -4,9 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/phil/projects/PlaygroundOpenCV/CVLib.cpp" "/home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/playground.dir/CVLib.cpp.o"
+  "/home/phil/projects/PlaygroundOpenCV/Corners.cpp" "/home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/playground.dir/Corners.cpp.o"
   "/home/phil/projects/PlaygroundOpenCV/Filter.cpp" "/home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/playground.dir/Filter.cpp.o"
   "/home/phil/projects/PlaygroundOpenCV/Gradient.cpp" "/home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/playground.dir/Gradient.cpp.o"
   "/home/phil/projects/PlaygroundOpenCV/Helper.cpp" "/home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/playground.dir/Helper.cpp.o"
+  "/home/phil/projects/PlaygroundOpenCV/HoughLines.cpp" "/home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/playground.dir/HoughLines.cpp.o"
   "/home/phil/projects/PlaygroundOpenCV/main.cpp" "/home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/playground.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

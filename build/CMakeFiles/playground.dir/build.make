@@ -141,12 +141,84 @@ CMakeFiles/playground.dir/Filter.cpp.o.provides: CMakeFiles/playground.dir/Filte
 
 CMakeFiles/playground.dir/Filter.cpp.o.provides.build: CMakeFiles/playground.dir/Filter.cpp.o
 
+CMakeFiles/playground.dir/CVLib.cpp.o: CMakeFiles/playground.dir/flags.make
+CMakeFiles/playground.dir/CVLib.cpp.o: ../CVLib.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/playground.dir/CVLib.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/playground.dir/CVLib.cpp.o -c /home/phil/projects/PlaygroundOpenCV/CVLib.cpp
+
+CMakeFiles/playground.dir/CVLib.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/playground.dir/CVLib.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/phil/projects/PlaygroundOpenCV/CVLib.cpp > CMakeFiles/playground.dir/CVLib.cpp.i
+
+CMakeFiles/playground.dir/CVLib.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/playground.dir/CVLib.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/phil/projects/PlaygroundOpenCV/CVLib.cpp -o CMakeFiles/playground.dir/CVLib.cpp.s
+
+CMakeFiles/playground.dir/CVLib.cpp.o.requires:
+.PHONY : CMakeFiles/playground.dir/CVLib.cpp.o.requires
+
+CMakeFiles/playground.dir/CVLib.cpp.o.provides: CMakeFiles/playground.dir/CVLib.cpp.o.requires
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/CVLib.cpp.o.provides.build
+.PHONY : CMakeFiles/playground.dir/CVLib.cpp.o.provides
+
+CMakeFiles/playground.dir/CVLib.cpp.o.provides.build: CMakeFiles/playground.dir/CVLib.cpp.o
+
+CMakeFiles/playground.dir/Corners.cpp.o: CMakeFiles/playground.dir/flags.make
+CMakeFiles/playground.dir/Corners.cpp.o: ../Corners.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/playground.dir/Corners.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/playground.dir/Corners.cpp.o -c /home/phil/projects/PlaygroundOpenCV/Corners.cpp
+
+CMakeFiles/playground.dir/Corners.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/playground.dir/Corners.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/phil/projects/PlaygroundOpenCV/Corners.cpp > CMakeFiles/playground.dir/Corners.cpp.i
+
+CMakeFiles/playground.dir/Corners.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/playground.dir/Corners.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/phil/projects/PlaygroundOpenCV/Corners.cpp -o CMakeFiles/playground.dir/Corners.cpp.s
+
+CMakeFiles/playground.dir/Corners.cpp.o.requires:
+.PHONY : CMakeFiles/playground.dir/Corners.cpp.o.requires
+
+CMakeFiles/playground.dir/Corners.cpp.o.provides: CMakeFiles/playground.dir/Corners.cpp.o.requires
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Corners.cpp.o.provides.build
+.PHONY : CMakeFiles/playground.dir/Corners.cpp.o.provides
+
+CMakeFiles/playground.dir/Corners.cpp.o.provides.build: CMakeFiles/playground.dir/Corners.cpp.o
+
+CMakeFiles/playground.dir/HoughLines.cpp.o: CMakeFiles/playground.dir/flags.make
+CMakeFiles/playground.dir/HoughLines.cpp.o: ../HoughLines.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/playground.dir/HoughLines.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/playground.dir/HoughLines.cpp.o -c /home/phil/projects/PlaygroundOpenCV/HoughLines.cpp
+
+CMakeFiles/playground.dir/HoughLines.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/playground.dir/HoughLines.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/phil/projects/PlaygroundOpenCV/HoughLines.cpp > CMakeFiles/playground.dir/HoughLines.cpp.i
+
+CMakeFiles/playground.dir/HoughLines.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/playground.dir/HoughLines.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/phil/projects/PlaygroundOpenCV/HoughLines.cpp -o CMakeFiles/playground.dir/HoughLines.cpp.s
+
+CMakeFiles/playground.dir/HoughLines.cpp.o.requires:
+.PHONY : CMakeFiles/playground.dir/HoughLines.cpp.o.requires
+
+CMakeFiles/playground.dir/HoughLines.cpp.o.provides: CMakeFiles/playground.dir/HoughLines.cpp.o.requires
+	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/HoughLines.cpp.o.provides.build
+.PHONY : CMakeFiles/playground.dir/HoughLines.cpp.o.provides
+
+CMakeFiles/playground.dir/HoughLines.cpp.o.provides.build: CMakeFiles/playground.dir/HoughLines.cpp.o
+
 # Object files for target playground
 playground_OBJECTS = \
 "CMakeFiles/playground.dir/main.cpp.o" \
 "CMakeFiles/playground.dir/Gradient.cpp.o" \
 "CMakeFiles/playground.dir/Helper.cpp.o" \
-"CMakeFiles/playground.dir/Filter.cpp.o"
+"CMakeFiles/playground.dir/Filter.cpp.o" \
+"CMakeFiles/playground.dir/CVLib.cpp.o" \
+"CMakeFiles/playground.dir/Corners.cpp.o" \
+"CMakeFiles/playground.dir/HoughLines.cpp.o"
 
 # External object files for target playground
 playground_EXTERNAL_OBJECTS =
@@ -155,6 +227,9 @@ playground: CMakeFiles/playground.dir/main.cpp.o
 playground: CMakeFiles/playground.dir/Gradient.cpp.o
 playground: CMakeFiles/playground.dir/Helper.cpp.o
 playground: CMakeFiles/playground.dir/Filter.cpp.o
+playground: CMakeFiles/playground.dir/CVLib.cpp.o
+playground: CMakeFiles/playground.dir/Corners.cpp.o
+playground: CMakeFiles/playground.dir/HoughLines.cpp.o
 playground: CMakeFiles/playground.dir/build.make
 playground: /usr/local/lib/libopencv_viz.so.3.0.0
 playground: /usr/local/lib/libopencv_videostab.so.3.0.0
@@ -220,6 +295,9 @@ CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/main.cpp.o.require
 CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/Gradient.cpp.o.requires
 CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/Helper.cpp.o.requires
 CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/Filter.cpp.o.requires
+CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/CVLib.cpp.o.requires
+CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/Corners.cpp.o.requires
+CMakeFiles/playground.dir/requires: CMakeFiles/playground.dir/HoughLines.cpp.o.requires
 .PHONY : CMakeFiles/playground.dir/requires
 
 CMakeFiles/playground.dir/clean:

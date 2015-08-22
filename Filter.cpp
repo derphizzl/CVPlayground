@@ -97,7 +97,7 @@ void Filter::executeConvolution(int row, int col)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uchar Filter::SobelX(cv::Mat& input, uint row, uint col) 
+double Filter::SobelX(cv::Mat& input, uint row, uint col) 
 {
 	int var = 1;
 	
@@ -135,7 +135,7 @@ uchar Filter::SobelX(cv::Mat& input, uint row, uint col)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-uchar Filter::SobelY(cv::Mat& input, uint row, uint col) 
+double Filter::SobelY(cv::Mat& input, uint row, uint col) 
 {
 	int var = 1;
 	
