@@ -2,7 +2,7 @@ Hough Transform for line detection
 
 
 Author: Philip Tutzer
-Date : 12.08.15
+Date : 22.08.15
 Wien
 
 Libs used: opencv 3.0 (for I/O)
