@@ -34,17 +34,17 @@ HoughL HoughLines::HoughTransform()
 	}
 	
 	// display the Hough Space
-	cv::Mat testOut = cv::Mat::zeros(m_accu_h, m_accu_w, CV_8UC1);
-	for (uint i = 0; i < m_accu_h; ++i) 
-	{
-		for (uint j = 0; j < m_accu_w; ++j) 
-		{
-			testOut.at<uchar>(i, j) = m_Accumulator[i][j];
-		}
-	}
-	
-	cv::imshow("bla", testOut);
-	cv::waitKey(0);
+// 	cv::Mat testOut = cv::Mat::zeros(m_accu_h, m_accu_w, CV_8UC1);
+// 	for (uint i = 0; i < m_accu_h; ++i) 
+// 	{
+// 		for (uint j = 0; j < m_accu_w; ++j) 
+// 		{
+// 			testOut.at<uchar>(i, j) = m_Accumulator[i][j];
+// 		}
+// 	}
+// 	
+// 	cv::imshow("bla", testOut);
+// 	cv::waitKey(0);
 	
 	//search for peaks
 	return HoughPeaks(m_Accumulator);
@@ -71,26 +71,26 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 		}
 	}
 	
-	cv::imshow("bla", testOut);
-	cv::waitKey(0);
+// 	cv::imshow("bla", testOut);
+// 	cv::waitKey(0);
 	
 	for (int r = 0; r < m_accu_h; r++) 
 	{
 		for (int t = 0; t < m_accu_w; t++) 
 		{
-			if (m_Accumulator[r][t] > 180) 
+			if (m_Accumulator[r][t] > 118) 
 			{	
 				int max = m_Accumulator[r][t];
-				for (int lx = -4; lx <= 4; ++lx) 
+				for (int lx = -5; lx <= 5; ++lx) 
 				{
-					for (int ly = -4; ly <= 4; ++ly) 
+					for (int ly = -5; ly <= 5; ++ly) 
 					{
-						if ((lx + t >= 0) && (lx + t < m_accu_h) && (ly + r >= 0) && (ly + r < m_accu_w)) 
+						if ((lx + r >= 0) && (lx + r < m_accu_h) && (ly + t >= 0) && (ly + t < m_accu_w)) 
 						{
-							if (m_Accumulator[t + lx][r + ly] > max) 
+							if (m_Accumulator[r + lx][t + ly] > max) 
 							{
 								max = m_Accumulator[r + lx][t + ly];
-								ly = lx = 5;
+								ly = lx = 6;
 							}
 						}
 					}
@@ -102,7 +102,7 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 				int x1, y1, x2, y2;
 				x1 = y1 = x2 = y2 = 0;
 				
-				if(r >= 45 && r <= 135)
+				if(t >= 45 && t <= 135)
 // 				if (r < 45 || r > 135)
 				{
 					x1 = 0;

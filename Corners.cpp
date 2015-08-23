@@ -1,3 +1,5 @@
+
+
 #include "Corners.hpp"
 using namespace houghline;
 
@@ -7,6 +9,7 @@ void Corners::displayHoughLines()
 	
 	cv::Mat dst, dst_norm, dst_norm_scaled, cdst;
 	
+
 	for (;;) 
 	{
 		cv::Mat in, out, gray;
@@ -18,13 +21,13 @@ void Corners::displayHoughLines()
 		
 		cv::cvtColor(in, gray, CV_BGR2GRAY);
 		
-		cv::imshow("bla", gray);
-		char c = cv::waitKey(30);
-		
-		if (c == 'q')
-			break;
-		if (c == 'd') 
-		{
+// 		cv::imshow("bla", gray);
+// 		char c = cv::waitKey(30);
+// 		
+// 		if (c == 'q')
+// 			break;
+// 		if (c == 'd') 
+// 		{
 			canny::getCannyEdge(gray, dst, 1, 7, 5, Utils::diffQ);
 			#if 0
 				vector<cv::Vec2f> lines;
@@ -53,8 +56,8 @@ void Corners::displayHoughLines()
 				}
 			#endif
 			
-			cv::imshow("bla", dst);
-			cv::waitKey(0);
+// 			cv::imshow("bla", dst);
+// 			cv::waitKey(0);
 
 			HoughLines newL(dst);
 			HoughL lines = newL.HoughTransform();
@@ -70,12 +73,14 @@ void Corners::displayHoughLines()
 						
 			
 			cv::imshow("bla", gray);
-			c = cv::waitKey(0);
+			char c = cv::waitKey(30);
 			
 			if (c == 'q')
 				break;
-		}
+// 		}
 	}
 	
 	return;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
