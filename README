@@ -14,3 +14,12 @@ NOTE:
 - no bugfixes 
 - threshold parameters as well as the camera index may be adapted
 - press "d" to execute the transform, "q" to quit the program 
+
+Special thanks to Bruno Keymolen:
+
+BSD License.
+This file is part of a Hough Transformation tutorial,
+see: http://www.keymolen.com/2013/05/hough-transformation-c-implementation.html
+
+Copyright (c) 2013, Bruno Keymolen, email: bruno.keymolen@gmail.com
+All rights reserved.
