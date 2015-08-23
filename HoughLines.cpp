@@ -18,7 +18,7 @@ HoughL HoughLines::HoughTransform()
 	{
 		for (int x = 0; x < this->m_w; x++) 
 		{
-			if (this->m_input.at<uchar>(x, y) > 250) 
+			if (this->m_input.at<uchar>(y, x) > 254) 
 			{
 				for (int deg = 0; deg < m_accu_w; deg++) 
 				{
@@ -63,16 +63,16 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 		{
 			if (m_Accumulator[r][t] > 300) 
 			{	
-				int max = m_Accumulator[r][t];
+				int max = m_Accumulator[t][r];
 				for (int lx = -4; lx <= 4; ++lx) 
 				{
 					for (int ly = -4; ly <= 4; ++ly) 
 					{
-						if ((ly + t >= 0) && (ly + t < m_accu_h) && (lx + r >= 0) && (lx + r < m_accu_w)) 
+						if ((lx + t >= 0) && (lx + t < m_accu_h) && (ly + r >= 0) && (ly + r < m_accu_w)) 
 						{
-							if (m_Accumulator[t + ly][r + lx] > max) 
+							if (m_Accumulator[t + lx][r + ly] > max) 
 							{
-								max = m_Accumulator[t + ly][r + lx];
+								max = m_Accumulator[t + lx][r + ly];
 								ly = lx = 5;
 							}
 						}
@@ -85,35 +85,20 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 				int x1, y1, x2, y2;
 				x1 = y1 = x2 = y2 = 0;
 				
-				if(r >= 45 && r <= 135) 
+				if(r >= 45 && r <= 135)
+// 				if (r < 45 || r > 135)
 				{
-				#if 0
-					y1 = 0;
-					x1 = ((double)(r-(m_accu_h/2)) - ((y1 - (m_center_y) ) * sin((t) * Helper::deg2rad))) / cos((t)  * Helper::deg2rad) + (m_center_x);
-					y2 = m_h;
-					x2 = ((double)(r-(m_accu_h/2)) - ((y2 - (m_center_y) ) * sin((t)  * Helper::deg2rad))) / cos((t)  * Helper::deg2rad) + (m_center_x);
-// 				#if 0	
-				#else
 					x1 = 0;
-					y1 = ((double)(r-(m_accu_h/2)) - ((x1 - (m_center_x) ) * cos((t) * Helper::deg2rad))) / sin((t) * Helper::deg2rad) + (m_center_y);
-					x2 = m_w;
-					y2 = ((double)(r-(m_accu_h/2)) - ((x2 - (m_center_x) ) * cos((t)  * Helper::deg2rad))) / sin((t)  * Helper::deg2rad) + (m_center_y);
-				#endif
+					y1 = ((double)(r-(m_accu_h/2)) - ((x1 - (m_w/2) ) * cos((t) * Helper::deg2rad))) / sin((t) * Helper::deg2rad) + (m_h/2);
+					x2 = m_w - 0;
+					y2 = ((double)(r-(m_accu_h/2)) - ((x2 - (m_w/2) ) * cos((t)  * Helper::deg2rad))) / sin((t)  * Helper::deg2rad) + (m_h/2);
 				}
 				else 
 				{
-				#if 0	
-					x1 = 0;
-					y1 = ((double)(r-(m_accu_h/2)) - ((x1 - (m_center_x) ) * cos((t) * Helper::deg2rad))) / sin((t) * Helper::deg2rad) + (m_center_y);
-					x2 = m_w;
-					y2 = ((double)(r-(m_accu_h/2)) - ((x2 - (m_center_x) ) * cos((t)  * Helper::deg2rad))) / sin((t)  * Helper::deg2rad) + (m_center_y);
-// 				#if 0	
-				#else	
 					y1 = 0;
-					x1 = ((double)(r-(m_accu_h/2)) - ((y1 - (m_center_y) ) * sin((t) * Helper::deg2rad))) / cos((t)  * Helper::deg2rad) + (m_center_x);
-					y2 = m_h;
-					x2 = ((double)(r-(m_accu_h/2)) - ((y2 - (m_center_y) ) * sin((t)  * Helper::deg2rad))) / cos((t)  * Helper::deg2rad) + (m_center_x);
-				#endif
+					x1 = ((double)(r-(m_accu_h/2)) - ((y1 - (m_h/2) ) * sin((t) * Helper::deg2rad))) / cos((t)  * Helper::deg2rad) + (m_w/2);
+					y2 = m_h - 0;
+					x2 = ((double)(r-(m_accu_h/2)) - ((y2 - (m_h/2) ) * sin((t) * Helper::deg2rad))) / cos((t)  * Helper::deg2rad) + (m_w/2);
 				}
 				
 				std::pair<int, int> one, two;
@@ -124,7 +109,8 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 				two.second = y2;
 				together.first = one;
 				together.second = two;
-				lines.push_back(together);	 
+				lines.push_back(together);
+				
 			}
 		}
 	}

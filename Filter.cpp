@@ -76,22 +76,25 @@ void Filter::executeConvolution(int row, int col)
 {
 	int var = (m_kernelSize - 1) / 2;
 	
-	if (row < var || col < var || row >= this->m_input.rows - var || col >= this->m_input.cols - var)
-		this->m_output.at<uchar>(row, col) = 0;
-	else 
-	{	
+// 	if (row < var || col < var || row >= this->m_input.rows - var || col >= this->m_input.cols - var)
+// 		this->m_output.at<uchar>(row, col) = 0;
+	
+		// 	else 
 		double tmp = 0.0;	  
 		
 		for (int i = - var; i <= var; i++) 
 		{
 			for (int j = -var; j <= var; j++) 
 			{
-				double t = ((double) this->m_input.at<uchar>(row + i, col + j) * this->inputKernel.matrix[i + var][j + var]);
-				tmp += t;
+				if (row + var >= 0 && row + var < m_input.rows && col + var >= 0 && col + var < m_input.cols)
+				{
+					double t = ((double) this->m_input.at<uchar>(row + i, col + j) * this->inputKernel.matrix[i + var][j + var]);
+					tmp += t;
+				}	
 			}	
 		}	     
 		this->m_output.at<uchar>(row, col) = (uchar) round(abs(tmp))/* / m_FilterSum*/; 
-	}		
+// 	}		
 		     
 }
 
@@ -119,13 +122,15 @@ double Filter::SobelX(cv::Mat& input, uint row, uint col)
 	{
 		for (int j = -var; j <= var; j++) 
 		{
-			if (row < 1)
-				row = 1;
-			if (col < 1)
-				col = 1;
-			
-			double t = (double) input.at<uchar>(row + i, col + j);
-			tmp  += (t * kern.matrix[i + var][j + var]);
+// 			if (row < 1)
+// 				row = 1;
+// 			if (col < 1)
+// 				col = 1;
+			if (row + var >= 0 && row + var < input.rows && col + var >= 0 && col + var < input.cols) 
+			{
+				double t = (double) input.at<uchar>(row + i, col + j);
+				tmp  += (t * kern.matrix[i + var][j + var]);
+			}	
 		}	
 	}	    
 	clearMatrix<double>(kern.matrix, 3);
@@ -157,12 +162,15 @@ double Filter::SobelY(cv::Mat& input, uint row, uint col)
 	{
 		for (int j = -var; j <= var; j++) 
 		{
-			if (row < 1)
-				row = 1;
-			if (col < 1)
-				col = 1;
-			double t = (double) input.at<uchar>(row + i, col + j); 
-			tmp += (t * kern.matrix[i + var][j + var]);
+// 			if (row < 1)
+// 				row = 1;
+// 			if (col < 1)
+// 				col = 1;
+			if (row + var >= 0 && row + var < input.rows && col + var >= 0 && col + var < input.cols) 
+			{
+				double t = (double) input.at<uchar>(row + i, col + j); 
+				tmp += (t * kern.matrix[i + var][j + var]);
+			}	
 			
 		}	
 	}	    

@@ -14,6 +14,7 @@ void Corners::displayHoughLines()
 		cap >> in;
 		if (in.data == NULL)
 			continue;
+// 		in = cv::imread("Edge1.jpg", CV_LOAD_IMAGE_COLOR);
 		
 		cv::cvtColor(in, gray, CV_BGR2GRAY);
 		
@@ -24,7 +25,7 @@ void Corners::displayHoughLines()
 			break;
 		if (c == 'd') 
 		{
-			canny::getCannyEdge(gray, dst, 3, 7, 5, Utils::diffQ);
+			canny::getCannyEdge(gray, dst, 1, 7, 5, Utils::diffQ);
 			#if 0
 				vector<cv::Vec2f> lines;
 				cv::HoughLines(dst, lines, 1, CV_PI/180, 180, 0, 0 );
@@ -64,21 +65,12 @@ void Corners::displayHoughLines()
 			
 			for (; it != end; ++it) 
 			{
-				cv::line(gray, cv::Point(it->first.first, it->first.second), cv::Point(it->second.first, it->second.second), 255, 1, 8);
+				cv::line(gray, cv::Point(it->first.first, it->first.second), cv::Point(it->second.first, it->second.second), 255, 1, 0);
 			}
-			
-// 			for (uint i = 0; i < gray.rows; ++i) 
-// 			{
-// 				for (uint j = 0; j < gray.cols; ++j) 
-// 				{			
-// 
-// 				}
-// 			}
-			
-			
+						
 			
 			cv::imshow("bla", gray);
-			char c = cv::waitKey(0);
+			c = cv::waitKey(0);
 			
 			if (c == 'q')
 				break;

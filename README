@@ -2,8 +2,8 @@ Hough Transform for line detection
 
 
 Author: Philip Tutzer
-Date : 22.08.15
-Wien
+Date : 23.08.15
+location: Vienna
 
 Libs used: opencv 3.0 (for I/O)
 
@@ -11,4 +11,6 @@ This program executes the canny edge detector and applies the Hough Transform fo
 
 NOTE:
 
-- output seems rotated and flipped
+- no bugfixes 
+- threshold parameters as well as the camera index may be adapted
+- press "d" to execute the transform, "q" to quit the program 

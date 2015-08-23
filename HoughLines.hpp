@@ -47,7 +47,7 @@ class HoughLines
 			this->m_h = this->m_input.rows;
 			
 			this->m_accu_w = 180;
-			this->m_accu_h = 2 * (int) round(sqrt(2)/2 * (m_h > m_w ? m_h : m_w ));
+			this->m_accu_h = 2 * (int) round(sqrt(2) * (m_h > m_w ? m_h : m_w ) / 2);
 			
 			this->m_Accumulator = createMatrix<int>(this->m_accu_h, this->m_accu_w);	
 			for (uint i = 0; i < m_accu_h; ++i) 
