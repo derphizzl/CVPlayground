@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include <cstdlib>
 #include <memory>
@@ -57,13 +59,28 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 	
 	HoughL lines;
 	
+	NMS(Accumulator);
+	
+	// display the Hough Space
+	cv::Mat testOut = cv::Mat::zeros(m_accu_h, m_accu_w, CV_8UC1);
+	for (uint i = 0; i < m_accu_h; ++i) 
+	{
+		for (uint j = 0; j < m_accu_w; ++j) 
+		{
+			testOut.at<uchar>(i, j) = m_Accumulator[i][j];
+		}
+	}
+	
+	cv::imshow("bla", testOut);
+	cv::waitKey(0);
+	
 	for (int r = 0; r < m_accu_h; r++) 
 	{
 		for (int t = 0; t < m_accu_w; t++) 
 		{
-			if (m_Accumulator[r][t] > 300) 
+			if (m_Accumulator[r][t] > 180) 
 			{	
-				int max = m_Accumulator[t][r];
+				int max = m_Accumulator[r][t];
 				for (int lx = -4; lx <= 4; ++lx) 
 				{
 					for (int ly = -4; ly <= 4; ++ly) 
@@ -72,14 +89,14 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 						{
 							if (m_Accumulator[t + lx][r + ly] > max) 
 							{
-								max = m_Accumulator[t + lx][r + ly];
+								max = m_Accumulator[r + lx][t + ly];
 								ly = lx = 5;
 							}
 						}
 					}
 				}
 				
-				if (max > m_Accumulator[t][r])
+				if (max > m_Accumulator[r][t])
 					continue;
 				
 				int x1, y1, x2, y2;
@@ -126,5 +143,36 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 	 return m_Accumulator;
  }
 
+ 
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+void HoughLines::NMS(int** Accum)
+{
+	cv::Mat in = cv::Mat::zeros(m_accu_h, m_accu_w, CV_8UC1);
+	
+	for (uint x = 0; x < m_accu_h; ++x) 
+	{
+		for (uint y = 0; y < m_accu_w; ++y) 
+		{
+			in.at<uchar>(x, y) = Accum[x][y];
+		}
+	}
+	
+	Gradient grad(in);
+	cv::Mat out = grad.NonMaxSuppression(Utils::diffQ);
+	
+	for (uint x = 0; x < m_accu_h; ++x) 
+	{
+		for (uint y = 0; y < m_accu_w; ++y) 
+		{
+			Accum[x][y] = (int) out.at<uchar>(x, y);
+		}
+	}
+	
+	return;
+}
+
+ 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

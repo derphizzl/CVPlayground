@@ -1,3 +1,4 @@
+
 #include "Gradient.hpp"
 
 using namespace Utils;
@@ -451,3 +452,12 @@ void Gradient::Travers(int x, int y)
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+cv::Mat Gradient::NonMaxSuppression(Utils::Algorithm alg) 
+{
+	m_algo = alg;
+	iterateOverImg();
+	NonMaximumSuppression();
+	
+	return this->m_gradientImg;
+}

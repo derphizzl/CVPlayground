@@ -7,6 +7,7 @@
 using namespace std;
 using namespace Utils;
 
+
 namespace houghline {
 
 typedef struct {
@@ -33,6 +34,8 @@ class HoughLines
 		double m_center_y;
 		
 		HoughL HoughPeaks(int** Accumulator);
+		
+		void NMS(int** Accum);
 		
 	public:
 		
