@@ -15,6 +15,10 @@ NOTE:
 - threshold parameters as well as the camera index may be adapted
 - press "d" to execute the transform, "q" to quit the program 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9b61353c00006af32171dd5299dd1371a38cc749
 Special thanks to Bruno Keymolen:
 
 BSD License.
