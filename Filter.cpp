@@ -8,11 +8,9 @@ using namespace std;
 
 void Filter::setInputKernel(FilterKernel kern, uint size)
 {
-// 	this->inputKernel = inp;
 	
 	this->inputKernel.matrix = kern.matrix;
 	m_kernelSize = size;
-// 	inputKernel.matrix = createMatrix<double>(m_kernelSize, m_kernelSize);	
 	
 	return;
 }
@@ -29,8 +27,6 @@ Filter::Filter(cv::Mat in, uint size)
 		inputKernel.matrix = createMatrix<double>(m_kernelSize, m_kernelSize);
 		gaussian();
 	}	
-	
-	
 	
 	return;
 }
@@ -69,7 +65,6 @@ void Filter::iterateOverImg()
 			executeConvolution(row, col);
 		}
 	}
-// 	this->output 
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +86,7 @@ void Filter::executeConvolution(int row, int col)
 				}	
 			}	
 		}	     
-		this->m_output.at<uchar>(row, col) = (uchar) round(abs(tmp))/* / m_FilterSum*/;      
+		this->m_output.at<uchar>(row, col) = (uchar) round(abs(tmp));      
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

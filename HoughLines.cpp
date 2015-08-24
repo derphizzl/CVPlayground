@@ -50,7 +50,7 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 	
 	HoughL lines;
 	
-	NMS(Accumulator);
+// 	NMS(Accumulator);
 	
 	for (int r = 0; r < m_accu_h; r++) 
 	{

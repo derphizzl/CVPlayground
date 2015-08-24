@@ -12,6 +12,8 @@ using namespace Utils;
 int main (int argc, char** argv) 
 {
 	cv::VideoCapture cap(0);
+	if(!cap.isOpened())  // check if succeeded
+		return -1;
 	
 	for (;;) 
 	{
@@ -38,7 +40,7 @@ int main (int argc, char** argv)
 			
 			canny::getCannyEdge(gray, edge, 1, 4, 5, Utils::diffQ);
 			
-			HoughLines newL(edge, 120); // 140
+			HoughLines newL(edge, 200); // 120
 			HoughL lines = newL.HoughTransform();
 			
 			int acc_size[2];
@@ -47,11 +49,22 @@ int main (int argc, char** argv)
 			
 			HoughL::iterator it = lines.begin();
 			HoughL::iterator end = lines.end();
-					
+			
+			cv::Mat circ = flip.clone();
+			
 			for (; it != end; ++it) 
 			{
 				cv::line(flip, cv::Point(it->first.first, it->first.second), cv::Point(it->second.first, it->second.second), cv::Scalar(0, 0, 255), 1, 8);
-				std::cout << "Line deg: " << atan2((it->second.second - it->first.second), (it->second.first - it->first.first)) * Helper::rad2deg << std::endl;
+// 				std::cout << "Line deg: " << atan2((it->second.second - it->first.second), (it->second.first - it->first.first)) * Helper::rad2deg << std::endl;
+			}	
+			
+			Corners inter;
+			vector<cv::Point> p = inter.getLineCrossings(lines);
+			vector<cv::Point>::iterator it1 = p.begin(), end1 = p.end();
+			
+			for (; it1 != end1; ++it1) 
+			{
+				cv::circle( flip, *it1, 3, cv::Scalar( 255, 0, 0 ), -1, 8 );
 			}	
 			
 			cv::imshow("Greyscale image", gray);
@@ -62,7 +75,9 @@ int main (int argc, char** argv)
 			c = cv::waitKey(0);
 			cv::imshow("Lines found", flip);
 			c = cv::waitKey(0);
-
+			cv::imshow("Corners", circ);
+			c = cv::waitKey(0);
+			
 			cv::destroyAllWindows();
 			
 			if (c == 'q')

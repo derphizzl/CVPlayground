@@ -24,25 +24,19 @@ namespace filter
 		int m_kernelSize;
 		FilterKernel inputKernel;
 		double m_FilterSum;
-		
-		
+				
 		void iterateOverImg();
 		void executeConvolution(int row, int col);
-		void edgeLinking(uint x, uint y);
 		void calcFilterSum();
 		
-		
-		
 	public: 
-		Filter(cv::Mat in, uint size);
+		Filter(cv::Mat in, uint kernel_size);
 		~Filter();
 		
 		void setInputKernel(FilterKernel kern, uint size);
 		cv::Mat getFilteredImg();
 		static double SobelX(cv::Mat& input, uint row, uint col);
 		static double SobelY(cv::Mat& input, uint row, uint col);
-		
-		
 		void gaussian();
 		
 	};
