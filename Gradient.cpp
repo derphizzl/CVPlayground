@@ -150,14 +150,14 @@ void Gradient::diffInX(Grad& in, int x, int y)
 {
 	if(m_algo == diffQ) 
 	{
-		if (x + 1 >= 0 && x + 1 < m_img.rows && y + 1 >= 0 && y + 1 < m_img.cols)
+		if (x - 1 >= 0 && x + 1 < m_img.rows && y - 1 >= 0 && y + 1 < m_img.cols)
 		{
 			in.dx = this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x, y);
 		}
 	}	
 	else if(m_algo == diffQN)
 	{
-		if (x + 1 >= 0 && x + 1 < m_img.rows && y + 1 >= 0 && y + 1 < m_img.cols)
+		if (x - 1 >= 0 && x + 1 < m_img.rows && y - 1 >= 0 && y + 1 < m_img.cols)
 		{
 			in.dx = ((this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y - 1) + this->m_img.at<uchar>(x - 1, y + 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
 				this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x + 1, y - 1))  / 2);
@@ -176,14 +176,14 @@ void Gradient::diffInY(Grad& in, int x, int y)
 	
 	if(m_algo == diffQ)
 	{
-		if (x + 1 >= 0 && x + 1 < m_img.rows && y + 1 >= 0 && y + 1 < m_img.cols)
+		if (x - 1 >= 0 && x + 1 < m_img.rows && y - 1 >= 0 && y + 1 < m_img.cols)
 		{
 			in.dy = this->m_img.at<uchar>(x, y + 1) - this->m_img.at<uchar>(x, y);
 		}	
 	}
-	else if(m_algo == diffQ)
+	else if(m_algo == diffQN)
 	{
-		if (x + 1 >= 0 && x + 1 < m_img.rows && y + 1 >= 0 && y + 1 < m_img.cols)
+		if (x - 1 >= 0 && x + 1 < m_img.rows && y - 1 >= 0 && y + 1 < m_img.cols)
 		{
 			in.dy = ((this->m_img.at<uchar>(x + 1, y) - this->m_img.at<uchar>(x - 1, y) + this->m_img.at<uchar>(x + 1, y - 1) - this->m_img.at<uchar>(x - 1, y - 1) + 
 				this->m_img.at<uchar>(x + 1, y + 1) - this->m_img.at<uchar>(x - 1, y + 1))  / 2);
@@ -250,14 +250,20 @@ void Gradient::NonMaximumSuppression()
 		
 			double anker, plusDir, minusDir;
 			
-			anker = this->m_gradientImg.at<uchar>(row, col);
-			plusDir = this->m_gradientImg.at<uchar>(row + m_gradientParam[row][col].dirX, col + m_gradientParam[row][col].dirY);
-			minusDir = this->m_gradientImg.at<uchar>(row - m_gradientParam[row][col].dirX, col - m_gradientParam[row][col].dirY);
-
-			if (plusDir > anker || minusDir > anker) 
+			if (row - 1 > 0 && row + 1 < this->m_gradientImg.rows) 
 			{
-				this->m_gradientImg.at<uchar>(row, col) = 0;
-			}
+				if (col - 1 > 0 && col + 1 < this->m_gradientImg.cols) 
+				{
+					anker = this->m_gradientImg.at<uchar>(row, col);
+					plusDir = this->m_gradientImg.at<uchar>(row + m_gradientParam[row][col].dirX, col + m_gradientParam[row][col].dirY);
+					minusDir = this->m_gradientImg.at<uchar>(row - m_gradientParam[row][col].dirX, col - m_gradientParam[row][col].dirY);
+
+					if (plusDir > anker || minusDir > anker) 
+					{
+						this->m_gradientImg.at<uchar>(row, col) = 0;
+					}
+				}
+			}	
 		}
 	}
 }

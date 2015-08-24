@@ -28,23 +28,11 @@ HoughL HoughLines::HoughTransform()
 				
 					int h = (int) round(r + ((double)(m_accu_h / 2)));
 					m_Accumulator[h][deg]++;
+					m_Acc_out[h][deg]++;
 				}	
 			}
 		}
 	}
-	
-	// display the Hough Space
-// 	cv::Mat testOut = cv::Mat::zeros(m_accu_h, m_accu_w, CV_8UC1);
-// 	for (uint i = 0; i < m_accu_h; ++i) 
-// 	{
-// 		for (uint j = 0; j < m_accu_w; ++j) 
-// 		{
-// 			testOut.at<uchar>(i, j) = m_Accumulator[i][j];
-// 		}
-// 	}
-// 	
-// 	cv::imshow("bla", testOut);
-// 	cv::waitKey(0);
 	
 	//search for peaks
 	return HoughPeaks(m_Accumulator);
@@ -54,6 +42,9 @@ HoughL HoughLines::HoughTransform()
  
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
+ 
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
 HoughL HoughLines::HoughPeaks(int** Accumulator)
 {
 	
@@ -61,24 +52,11 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
 	
 	NMS(Accumulator);
 	
-	// display the Hough Space
-	cv::Mat testOut = cv::Mat::zeros(m_accu_h, m_accu_w, CV_8UC1);
-	for (uint i = 0; i < m_accu_h; ++i) 
-	{
-		for (uint j = 0; j < m_accu_w; ++j) 
-		{
-			testOut.at<uchar>(i, j) = m_Accumulator[i][j];
-		}
-	}
-	
-// 	cv::imshow("bla", testOut);
-// 	cv::waitKey(0);
-	
 	for (int r = 0; r < m_accu_h; r++) 
 	{
 		for (int t = 0; t < m_accu_w; t++) 
 		{
-			if (m_Accumulator[r][t] > 118) 
+			if (m_Accumulator[r][t] > m_Threshold) 
 			{	
 				int max = m_Accumulator[r][t];
 				for (int lx = -5; lx <= 5; ++lx) 
@@ -140,7 +118,7 @@ HoughL HoughLines::HoughPeaks(int** Accumulator)
  
  int** HoughLines::getAccumulator() 
  {
-	 return m_Accumulator;
+	 return m_Acc_out;
  }
 
  
@@ -175,4 +153,13 @@ void HoughLines::NMS(int** Accum)
  
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+void HoughLines::getAccumulatorSize(int* size) 
+{
+	size[0] = m_accu_w;
+	size[1] = m_accu_h;
+}
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

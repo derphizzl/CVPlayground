@@ -47,8 +47,10 @@ class canny {
 				std::cout << "image value --> NULL" << std::endl;
 				return;
 			}
-
-			cv::Mat grey = Helper::color2grey(input);
+			
+			cv::Mat grey;
+			cv::cvtColor(input, grey, CV_BGR2GRAY);
+			
 
 			bool flag = true;
 	

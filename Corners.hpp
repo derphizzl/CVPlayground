@@ -10,5 +10,5 @@ using namespace houghline;
 class Corners 
 {
 public:
-	static void displayHoughLines();	
+		
 };
