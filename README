@@ -1,5 +1,8 @@
 linear HOUGH TRANSFORM 
 
+
+Press "d" to execute the transform, "q" to quit! 
+
 note:
 
 - Thresholds may be adapted (getCannyEdge, HoughTransform())
