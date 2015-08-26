@@ -1,19 +1,6 @@
-linear HOUGH TRANSFORM 
+Author: Philip Tutzer
+Date: 08.2015
 
 
-Press "d" to execute the transform, "q" to quit! 
-
-note:
-
-- Thresholds may be adapted (getCannyEdge, HoughTransform())
-
-
-
-Thanks to Bruno Keymolen: 
-
-BSD License.
-This file is part of a Hough Transformation tutorial,
-see: http://www.keymolen.com/2013/05/hough-transformation-c-implementation.html
-
-Copyright (c) 2013, Bruno Keymolen, email: bruno.keymolen@gmail.com
-All rights reserved.
+Corner Detection algorithms: 
+- Harris Corner Detector

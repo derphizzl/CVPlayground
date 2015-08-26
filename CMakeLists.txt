@@ -1,7 +1,10 @@
-cmake_minimum_required(VERSION 2.8)
-project( playground )
+cmake_minimum_required(VERSION 2.6)
+project(cornerdetection)
 find_package( OpenCV REQUIRED )
-add_executable(playground main.cpp Gradient.cpp Helper.cpp Filter.cpp CVLib.cpp Corners.cpp HoughLines.cpp)
-target_link_libraries(playground ${OpenCV_LIBS} )
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-# add_library(CVLib STATIC CannyEdge.hpp Filter.hpp Filter.cpp Gradient.cpp Gradient.hpp Helper.cpp Helper.hpp CVLib.cpp CVLib.h)
+add_executable(cornerdetection main.cpp HarrisCorners.cpp)
+target_link_libraries(cornerdetection libLHTlib.a ${OpenCV_LIBS} )
+
+
+install(TARGETS cornerdetection RUNTIME DESTINATION bin)

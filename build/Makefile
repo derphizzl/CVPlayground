@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/phil/projects/PlaygroundOpenCV
+CMAKE_SOURCE_DIR = /home/phil/projects/CornerDetection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/phil/projects/PlaygroundOpenCV/build
+CMAKE_BINARY_DIR = /home/phil/projects/CornerDetection/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -61,6 +61,47 @@ edit_cache:
 edit_cache/fast: edit_cache
 .PHONY : edit_cache/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+.PHONY : install/strip/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -73,9 +114,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/CornerDetection/build/CMakeFiles /home/phil/projects/CornerDetection/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/CornerDetection/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -103,168 +144,48 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named playground
+# Target rules for targets named cornerdetection
 
 # Build rule for target.
-playground: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 playground
-.PHONY : playground
+cornerdetection: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 cornerdetection
+.PHONY : cornerdetection
 
 # fast build rule for target.
-playground/fast:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/build
-.PHONY : playground/fast
+cornerdetection/fast:
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/build
+.PHONY : cornerdetection/fast
 
-CVLib.o: CVLib.cpp.o
-.PHONY : CVLib.o
-
-# target to build an object file
-CVLib.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/CVLib.cpp.o
-.PHONY : CVLib.cpp.o
-
-CVLib.i: CVLib.cpp.i
-.PHONY : CVLib.i
-
-# target to preprocess a source file
-CVLib.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/CVLib.cpp.i
-.PHONY : CVLib.cpp.i
-
-CVLib.s: CVLib.cpp.s
-.PHONY : CVLib.s
-
-# target to generate assembly for a file
-CVLib.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/CVLib.cpp.s
-.PHONY : CVLib.cpp.s
-
-Corners.o: Corners.cpp.o
-.PHONY : Corners.o
+HarrisCorners.o: HarrisCorners.cpp.o
+.PHONY : HarrisCorners.o
 
 # target to build an object file
-Corners.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Corners.cpp.o
-.PHONY : Corners.cpp.o
+HarrisCorners.cpp.o:
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/HarrisCorners.cpp.o
+.PHONY : HarrisCorners.cpp.o
 
-Corners.i: Corners.cpp.i
-.PHONY : Corners.i
-
-# target to preprocess a source file
-Corners.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Corners.cpp.i
-.PHONY : Corners.cpp.i
-
-Corners.s: Corners.cpp.s
-.PHONY : Corners.s
-
-# target to generate assembly for a file
-Corners.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Corners.cpp.s
-.PHONY : Corners.cpp.s
-
-Filter.o: Filter.cpp.o
-.PHONY : Filter.o
-
-# target to build an object file
-Filter.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Filter.cpp.o
-.PHONY : Filter.cpp.o
-
-Filter.i: Filter.cpp.i
-.PHONY : Filter.i
+HarrisCorners.i: HarrisCorners.cpp.i
+.PHONY : HarrisCorners.i
 
 # target to preprocess a source file
-Filter.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Filter.cpp.i
-.PHONY : Filter.cpp.i
+HarrisCorners.cpp.i:
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/HarrisCorners.cpp.i
+.PHONY : HarrisCorners.cpp.i
 
-Filter.s: Filter.cpp.s
-.PHONY : Filter.s
-
-# target to generate assembly for a file
-Filter.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Filter.cpp.s
-.PHONY : Filter.cpp.s
-
-Gradient.o: Gradient.cpp.o
-.PHONY : Gradient.o
-
-# target to build an object file
-Gradient.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Gradient.cpp.o
-.PHONY : Gradient.cpp.o
-
-Gradient.i: Gradient.cpp.i
-.PHONY : Gradient.i
-
-# target to preprocess a source file
-Gradient.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Gradient.cpp.i
-.PHONY : Gradient.cpp.i
-
-Gradient.s: Gradient.cpp.s
-.PHONY : Gradient.s
+HarrisCorners.s: HarrisCorners.cpp.s
+.PHONY : HarrisCorners.s
 
 # target to generate assembly for a file
-Gradient.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Gradient.cpp.s
-.PHONY : Gradient.cpp.s
-
-Helper.o: Helper.cpp.o
-.PHONY : Helper.o
-
-# target to build an object file
-Helper.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Helper.cpp.o
-.PHONY : Helper.cpp.o
-
-Helper.i: Helper.cpp.i
-.PHONY : Helper.i
-
-# target to preprocess a source file
-Helper.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Helper.cpp.i
-.PHONY : Helper.cpp.i
-
-Helper.s: Helper.cpp.s
-.PHONY : Helper.s
-
-# target to generate assembly for a file
-Helper.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/Helper.cpp.s
-.PHONY : Helper.cpp.s
-
-HoughLines.o: HoughLines.cpp.o
-.PHONY : HoughLines.o
-
-# target to build an object file
-HoughLines.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/HoughLines.cpp.o
-.PHONY : HoughLines.cpp.o
-
-HoughLines.i: HoughLines.cpp.i
-.PHONY : HoughLines.i
-
-# target to preprocess a source file
-HoughLines.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/HoughLines.cpp.i
-.PHONY : HoughLines.cpp.i
-
-HoughLines.s: HoughLines.cpp.s
-.PHONY : HoughLines.s
-
-# target to generate assembly for a file
-HoughLines.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/HoughLines.cpp.s
-.PHONY : HoughLines.cpp.s
+HarrisCorners.cpp.s:
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/HarrisCorners.cpp.s
+.PHONY : HarrisCorners.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -272,7 +193,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -280,7 +201,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -289,27 +210,16 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... cornerdetection"
 	@echo "... edit_cache"
-	@echo "... playground"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... CVLib.o"
-	@echo "... CVLib.i"
-	@echo "... CVLib.s"
-	@echo "... Corners.o"
-	@echo "... Corners.i"
-	@echo "... Corners.s"
-	@echo "... Filter.o"
-	@echo "... Filter.i"
-	@echo "... Filter.s"
-	@echo "... Gradient.o"
-	@echo "... Gradient.i"
-	@echo "... Gradient.s"
-	@echo "... Helper.o"
-	@echo "... Helper.i"
-	@echo "... Helper.s"
-	@echo "... HoughLines.o"
-	@echo "... HoughLines.i"
-	@echo "... HoughLines.s"
+	@echo "... HarrisCorners.o"
+	@echo "... HarrisCorners.i"
+	@echo "... HarrisCorners.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -47,44 +47,44 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/phil/projects/PlaygroundOpenCV
+CMAKE_SOURCE_DIR = /home/phil/projects/CornerDetection
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/phil/projects/PlaygroundOpenCV/build
+CMAKE_BINARY_DIR = /home/phil/projects/CornerDetection/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/playground.dir
+# Target rules for target CMakeFiles/cornerdetection.dir
 
 # All Build rule for target.
-CMakeFiles/playground.dir/all:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/depend
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles  1 2 3 4 5 6 7
-	@echo "Built target playground"
-.PHONY : CMakeFiles/playground.dir/all
+CMakeFiles/cornerdetection.dir/all:
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/depend
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/phil/projects/CornerDetection/build/CMakeFiles  1 2
+	@echo "Built target cornerdetection"
+.PHONY : CMakeFiles/cornerdetection.dir/all
 
 # Include target in all.
-all: CMakeFiles/playground.dir/all
+all: CMakeFiles/cornerdetection.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/playground.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles 7
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/playground.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/PlaygroundOpenCV/build/CMakeFiles 0
-.PHONY : CMakeFiles/playground.dir/rule
+CMakeFiles/cornerdetection.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/CornerDetection/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/cornerdetection.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/phil/projects/CornerDetection/build/CMakeFiles 0
+.PHONY : CMakeFiles/cornerdetection.dir/rule
 
 # Convenience name for target.
-playground: CMakeFiles/playground.dir/rule
-.PHONY : playground
+cornerdetection: CMakeFiles/cornerdetection.dir/rule
+.PHONY : cornerdetection
 
 # clean rule for target.
-CMakeFiles/playground.dir/clean:
-	$(MAKE) -f CMakeFiles/playground.dir/build.make CMakeFiles/playground.dir/clean
-.PHONY : CMakeFiles/playground.dir/clean
+CMakeFiles/cornerdetection.dir/clean:
+	$(MAKE) -f CMakeFiles/cornerdetection.dir/build.make CMakeFiles/cornerdetection.dir/clean
+.PHONY : CMakeFiles/cornerdetection.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/playground.dir/clean
+clean: CMakeFiles/cornerdetection.dir/clean
 .PHONY : clean
 
 #=============================================================================
