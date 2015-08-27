@@ -1,6 +1,9 @@
 Author: Philip Tutzer
 Date: 08.2015
 
-
 Corner Detection algorithms: 
-- Harris Corner Detector
+- Harris Corner Detector in C++11 (Platform: Linux)
+
+
+NOTE:
+- you need to add OpenCV 3.0 and libLHT.a (in /libs) to run the project
