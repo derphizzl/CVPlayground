@@ -1,6 +1,6 @@
 #pragma once
 
-#include "/home/phil/Libs/LHT/Corners.hpp"
+#include "inc/Gradient.hpp"
 
 typedef std::vector<cv::Point> H_Corners;
 
@@ -30,14 +30,27 @@ public:
 private:
 	cv::Mat m_input;
 	double m_threshold;
-	std::vector<double> m_response;
+	std::vector<int> m_response;
+	std::vector<int> m_response_out;
+	long** m_mat;
+	Grad** m_grMat;
 	
 	
-	double computeDetectorResponse(DProd& d);
+	int computeDetectorResponse(DProd& d);
 	void computeProductOfDerivatives(DProd& sum, Grad& gr);
 	void computeSumsOfProducts(DProd& sumProd, Grad& gr);
 	void Thresholding();
-	void NMS(cv::Mat in);
+	void NMS();
 	H_Corners getOutput();
 	
+	
+	// debug variables //
+	Grad m_grad;
+	long m_Ix, m_Iy, m_Ixy;
+	long m_Sx, m_Sy, m_Sxy;
+	long m_detH, m_traceH, m_resp;
+	
+	void getDebugValues();
+	
+
 };
